@@ -28,6 +28,5 @@ jobs:
               with:
                   name: linux-builds
                   path: |
-                      src-tauri/target/release/bundle/appimage/*.AppImage
-                      src-tauri/target/release/bundle/deb/*.deb
-                      src-tauri/target/release/bundle/rpm/*.rpm
+                      dist/daemon
+                      dist/matugen
