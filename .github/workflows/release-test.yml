@@ -1,0 +1,27 @@
+name: Release-Test
+
+on:
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    build-linux:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - name: Setup Rust
+              uses: dtolnay/rust-toolchain@stable
+            - name: Build Daemon
+              run: scripts/setup-daemon.sh
+            - name: Build Matugen
+              run: scripts/setup-matugen.sh
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v5
+              with:
+                  name: linux-builds
+                  path: |
+                      src-tauri/target/release/bundle/appimage/*.AppImage
+                      src-tauri/target/release/bundle/deb/*.deb
+                      src-tauri/target/release/bundle/rpm/*.rpm
